@@ -68,9 +68,18 @@ class ReactHowler extends Component {
   }
 
   toggleHowler (props) {
-    (props.playing) ? this.play() : this.pause()
+    if (props.playing) {
+      if (props.sprite && props.spriteToPlay) {
+        this.play(props.spriteToPlay)
+      } else {
+        this.play()
+      }
+    } else {
+      this.pause()
+    }
+
     this.mute(props.mute)
-    this.loop(props.loop)
+    this.loop(props.loop || props.sprite[props.spriteToPlay][2])
 
     if (props.volume !== this.props.volume) {
       this.volume(props.volume)
@@ -94,7 +103,7 @@ class ReactHowler extends Component {
   /**
    * Begins playback of a sound when not playing
    */
-  play () {
+  play (id = undefined) {
     const playing = this.howler.playing()
 
     if (!playing) {
@@ -104,7 +113,7 @@ class ReactHowler extends Component {
         this.load()
       }
 
-      this.howler.play()
+      this.howler.play(id)
     }
   }
 
