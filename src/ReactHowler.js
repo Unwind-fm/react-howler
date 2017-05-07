@@ -46,7 +46,8 @@ class ReactHowler extends Component {
         onstop: props.onStop,
         onload: props.onLoad,
         onloaderror: props.onLoadError,
-        html5: props.html5
+        html5: props.html5,
+        sprite: props.sprite
       })
 
       if (props.playing) {
